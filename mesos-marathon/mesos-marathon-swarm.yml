@@ -32,9 +32,9 @@ services:
     environment:
      - "constraint:node==*swarm-master*"
 
-  mesosslave:
-    image: mesosphere/mesos-slave:0.25.0-0.2.70.ubuntu1404
-    # no container name because then mesosslaves can't be scaled
+  mesosagent:
+    image: mesosphere/mesos-slave:0.28.1-2.0.20.ubuntu1404
+    # no container name because then mesosagent can't be scaled
     volumes:
      - /usr/local/bin/docker:/bin/docker
      - /var/run/docker.sock:/var/run/docker.sock
@@ -46,5 +46,5 @@ services:
      - MESOS_LOG_DIR=/var/log/mesos
      - MESOS_LOGGING_LEVEL=INFO
      - "affinity:container!=*zookeeper*"
-     - "affinity:container!=*mesosslave*"
+     - "affinity:container!=*mesosagent*"
 
